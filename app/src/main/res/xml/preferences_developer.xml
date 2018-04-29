@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <PreferenceCategory
+        android:key="pref_key_debug"
+        android:title="@string/debug">
+        <SwitchPreference
+            android:defaultValue="false"
+            android:key="pref_key_debug_mode"
+            android:summary="@string/debug_mode_pref_description"
+            android:title="@string/debug_mode_pref_title" />
+    </PreferenceCategory>
+    <PreferenceCategory
+        android:key="pref_key_party_mode"
+        android:title="@string/party_mode_fragment_settings">
+        <ListPreference
+            android:defaultValue="1"
+            android:entries="@array/azimuth_pitch_roll"
+            android:entryValues="@array/azimuth_pitch_roll_values"
+            android:key="pref_key_hue_axis"
+            android:summary="@string/hue_axis_pref_description"
+            android:title="@string/hue_axis_pref_title" />
+        <ListPreference
+            android:defaultValue="2"
+            android:entries="@array/azimuth_pitch_roll"
+            android:entryValues="@array/azimuth_pitch_roll_values"
+            android:key="pref_key_saturation_axis"
+            android:summary="@string/saturation_axis_pref_description"
+            android:title="@string/saturation_axis_pref_title" />
+        <ListPreference
+            android:defaultValue="3"
+            android:entries="@array/azimuth_pitch_roll"
+            android:entryValues="@array/azimuth_pitch_roll_values"
+            android:key="pref_key_value_axis"
+            android:summary="@string/value_axis_pref_description"
+            android:title="@string/value_axis_pref_title" />
+        <ListPreference
+            android:defaultValue="1"
+            android:entries="@array/color_changing_sensitivity"
+            android:entryValues="@array/color_changing_sensitivity_values"
+            android:key="pref_key_color_change_sensitivity"
+            android:title="@string/color_changing_sensitivity_title" />
+    </PreferenceCategory>
+</PreferenceScreen>

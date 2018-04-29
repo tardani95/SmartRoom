@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <PreferenceCategory
+        android:key="pref_key_led_strip"
+        android:title="@string/led_strip">
+        <EditTextPreference
+            android:defaultValue="@string/default_led_strip_ip"
+            android:key="pref_key_led_strip_address"
+            android:summary="@string/led_strip_pref_description"
+            android:title="@string/led_strip_pref_title" />
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:key="pref_key_notifications"
+        android:title="@string/notifications">
+        <SwitchPreference
+            android:defaultValue="false"
+            android:key="pref_key_visual_notification"
+            android:summary="@string/visual_notification_pref_description"
+            android:title="@string/visual_notification_pref_title" />
+        <com.application.tardaniel.smartroom.preferencecomponents.DialogColorPickerPreference
+            android:defaultValue="f8ff00"
+            android:dependency="pref_key_visual_notification"
+            android:key="pref_key_incoming_call_color"
+            android:summary="@string/incoming_call_color_pref_description"
+            android:title="@string/incoming_call_color_pref_title" />
+        <com.application.tardaniel.smartroom.preferencecomponents.DialogColorPickerPreference
+            android:defaultValue="ec00ff"
+            android:dependency="pref_key_visual_notification"
+            android:key="pref_key_sms_color"
+            android:summary="@string/sms_color_pref_description"
+            android:title="@string/sms_color_pref_title" />
+    </PreferenceCategory>
+    <PreferenceCategory
+        android:key="pref_key_pick_mode"
+        android:title="@string/simple_color_picking_mode">
+        <SwitchPreference
+            android:defaultValue="false"
+            android:key="pref_auto_color_picking_mode"
+            android:summary="@string/simple_color_picking_pref_description"
+            android:title="@string/simple_color_picking_pref_title" />
+
+    </PreferenceCategory>
+    <PreferenceCategory
+        android:key="pref_key_default_fragment"
+        android:title="@string/default_starting_screen">
+        <ListPreference
+            android:defaultValue="0"
+            android:entries="@array/default_fragments"
+            android:entryValues="@array/default_fragments_values"
+            android:key="pref_key_default_fragment"
+            android:title="@string/default_fragment_pref_title" />
+    </PreferenceCategory>
+
+</PreferenceScreen>

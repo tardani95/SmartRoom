@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group
+        android:id="@+id/color_picking_modes"
+        android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_simple_color_picker"
+            android:icon="@drawable/ic_invert_colors"
+            android:title="@string/nav_simple_color_picker" />
+        <item
+            android:id="@+id/nav_party_mode"
+            android:icon="@drawable/ic_3d_rotation"
+            android:title="@string/nav_party_mode" />
+    </group>
+    <group android:checkableBehavior="single">
+        <!--<item-->
+        <!--android:id="@+id/nav_connect_device"-->
+        <!--android:icon="@drawable/ic_bluetooth_searching"-->
+        <!--android:title="@string/nav_connect_device" />-->
+        <item
+            android:id="@+id/nav_settings"
+            android:icon="@drawable/ic_manage"
+            android:title="@string/nav_settings" />
+        <item
+            android:id="@+id/nav_dev_settings"
+            android:icon="@drawable/ic_settings"
+            android:title="@string/nav_dev_settings" />
+
+    </group>
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_about"
+            android:icon="@drawable/ic_info_outline"
+            android:title="@string/nav_about" />
+    </group>
+</menu>

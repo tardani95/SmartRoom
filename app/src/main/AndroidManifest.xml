@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.application.tardaniel.smartroom">
+
+    <!--for the UDP communication-->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <!--for detecting incoming sms-->
+    <uses-permission android:name="android.permission.RECEIVE_SMS"/>
+    <!--<uses-permission android:name="android.permission.BROADCAST_SMS"/>-->
+    <!--for detecting incoming calls-->
+    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+    <!--request network connection state-->
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+
+    <!--TODO: udpdate application icon-->
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity
+            android:name=".MainNavigationActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <service
+            android:name=".network.UdpIntentService"
+            android:exported="false" />
+
+        <receiver
+            android:name=".broadcastreceiver.NotificationReceiver"
+            android:enabled="true">
+            <intent-filter>
+                <action android:name="android.provider.Telephony.SMS_RECEIVED" />
+                <action android:name="android.intent.action.PHONE_STATE"/>
+            </intent-filter>
+        </receiver>
+    </application>
+
+</manifest>
