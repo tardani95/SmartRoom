@@ -45,7 +45,8 @@ public class NotificationReceiver extends BroadcastReceiver {
                         if (state.equals(TelephonyManager.EXTRA_STATE_RINGING)) {
                             //Toast.makeText(context, "Phone Is Ringing", Toast.LENGTH_SHORT).show();
                             String hexColor = String.format("#%06X", (0xFFFFFF & colorIncomingCall));
-                            UdpIntentService.sendPacket(context, hexColor, context.getString(R.string.mode_incoming_call));
+                            //UdpIntentService.sendPacket(context, hexColor, context.getString(R.string.mode_incoming_call));
+                            UdpIntentService.sendColor(context, colorIncomingCall,0);
                         }
                         /*if (state.equals(TelephonyManager.EXTRA_STATE_OFFHOOK)) {
                             //Toast.makeText(context, "Call Recieved", Toast.LENGTH_LONG).show();
@@ -62,7 +63,8 @@ public class NotificationReceiver extends BroadcastReceiver {
                 case SMS_RECEIVED: {
                     String hexColor = String.format("#%06X", (0xFFFFFF & colorSms));
                     //String hexColor = Integer.toHexString(colorSms);
-                    UdpIntentService.sendPacket(context, hexColor, context.getString(R.string.mode_sms_received));
+                    //UdpIntentService.sendPacket(context, hexColor, context.getString(R.string.mode_sms_received));
+                    UdpIntentService.sendColor(context, colorSms,0);
                     break;
                 }
 

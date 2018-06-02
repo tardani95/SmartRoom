@@ -120,7 +120,7 @@ public class UdpIntentService extends IntentService {
                 final String color = intent.getStringExtra(COLOR);
                 final String mode = intent.getStringExtra(MODE);
                 handleActionSendCommand(color, mode);
-                handleActionSendCommand(intent.getStringExtra(COLOR), intent.getStringExtra(MODE));
+                //handleActionSendCommand(intent.getStringExtra(COLOR), intent.getStringExtra(MODE));
 
             } else if (ACTION_SET_LOCAL_IP_ADDRESS.equals(action)) {
                 final String param1 = intent.getStringExtra(LOCAL_IP_ADDRESS);
