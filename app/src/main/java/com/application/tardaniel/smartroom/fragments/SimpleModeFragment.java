@@ -69,13 +69,13 @@ public class SimpleModeFragment extends Fragment {
         btnGreen.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                sendColor(getContext(),0xff00ff00,1);
+                sendColor(getContext(),0xff00ff00,0);
             }
         });
         btnBlue.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                sendColor(getContext(),0xff0000ff,2);
+                sendColor(getContext(),0xff0000ff,0);
             }
         });
 
