@@ -36,7 +36,8 @@
 
         <receiver
             android:name=".broadcastreceiver.NotificationReceiver"
-            android:enabled="true">
+            android:enabled="true"
+            android:permission="android.permission.BROADCAST_SMS">
             <intent-filter>
                 <action android:name="android.provider.Telephony.SMS_RECEIVED" />
                 <action android:name="android.intent.action.PHONE_STATE"/>
