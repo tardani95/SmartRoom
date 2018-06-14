@@ -12,6 +12,9 @@
     <!--request network connection state-->
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
 
+    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+
     <!--TODO: udpdate application icon-->
     <application
         android:allowBackup="true"

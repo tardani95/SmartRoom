@@ -1,114 +1,121 @@
 package com.application.tardaniel.smartroom.fragments;
 
+import android.Manifest;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import com.application.tardaniel.smartroom.AudioVisuals.AudioInputReader;
 import com.application.tardaniel.smartroom.AudioVisuals.VisualizerView;
 import com.application.tardaniel.smartroom.R;
 
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link VisualizerFragment.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link VisualizerFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
-public class VisualizerFragment extends Fragment implements SharedPreferences.OnSharedPreferenceChangeListener {
+public class VisualizerFragment extends Fragment {
 
     private static final int MY_PERMISSION_RECORD_AUDIO_REQUEST_CODE = 88;
     private VisualizerView mVisualizerView;
+    private Button mStartStopButton;
     private AudioInputReader mAudioInputReader;
-
-    private OnFragmentInteractionListener mListener;
+    private boolean startMusic = true;
 
     public VisualizerFragment() {
         // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment VisualizerFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static VisualizerFragment newInstance(String param1, String param2) {
-        VisualizerFragment fragment = new VisualizerFragment();
-        Bundle args = new Bundle();
-//        args.putString(ARG_PARAM1, param1);
-//        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-//            mParam1 = getArguments().getString(ARG_PARAM1);
-//            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_visualizer, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_visualizer, container, false);
+        mVisualizerView = (VisualizerView) rootView.findViewById(R.id.visualizer_view);
+
+        setupSharedPreferences();
+        setupPermissions();
+
+        mAudioInputReader.shutdown(false);
+
+        mStartStopButton = (Button) rootView.findViewById(R.id.start_stop_button);
+        mStartStopButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (mAudioInputReader != null) {
+                    if (startMusic) {
+                        startMusic = false;
+                        mAudioInputReader.restart();
+                    }else {
+                        startMusic = true;
+                        mAudioInputReader.shutdown(false);
+                    }
+                }
+            }
+        });
+
+        return rootView;
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
+    private void setupSharedPreferences() {
+        // Get all of the values from shared preferences to set it up
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getContext());
+        mVisualizerView.setShowBass(sharedPreferences.getBoolean(getString(R.string.pref_show_bass_key),
+                getResources().getBoolean(R.bool.pref_show_bass_default)));
+        mVisualizerView.setShowMid(sharedPreferences.getBoolean(getString(R.string.pref_show_mid_range_key),
+                getResources().getBoolean(R.bool.pref_show_mid_range_default)));
+        mVisualizerView.setShowTreble(sharedPreferences.getBoolean(getString(R.string.pref_show_treble_key),
+                getResources().getBoolean(R.bool.pref_show_treble_default)));
+        loadColorFromPreferences(sharedPreferences);
+        loadSizeFromSharedPreferences(sharedPreferences);
     }
 
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        if (context instanceof OnFragmentInteractionListener) {
-            mListener = (OnFragmentInteractionListener) context;
-        } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
-        }
+    private void loadColorFromPreferences(SharedPreferences sharedPreferences) {
+        mVisualizerView.setColor(sharedPreferences.getString(getString(R.string.pref_color_key),
+                getString(R.string.pref_color_red_value)));
     }
 
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        mListener = null;
+    private void loadSizeFromSharedPreferences(SharedPreferences sharedPreferences) {
+        float minSize = Float.parseFloat(sharedPreferences.getString(getString(R.string.pref_size_key),
+                getString(R.string.pref_size_default)));
+        mVisualizerView.setMinSizeScale(minSize);
     }
 
     /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
-    public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        void onFragmentInteraction(Uri uri);
+     * onPause Cleanup audio stream
+     **/
+    @Override
+    public void onPause() {
+        super.onPause();
     }
 
-
     @Override
-    public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String s) {
+    public void onResume() {
+        super.onResume();
+        setupSharedPreferences();
+    }
 
+    /**
+     * App Permissions for Audio
+     **/
+    private void setupPermissions() {
+        // If we don't have the record audio permission...
+        Context context = getContext();
+        if (ActivityCompat.checkSelfPermission(context, Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED) {
+            // And if we're on SDK M or later...
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                // Ask again, nicely, for the permissions.
+                String[] permissionsWeNeed = new String[]{Manifest.permission.RECORD_AUDIO};
+                requestPermissions(permissionsWeNeed, MY_PERMISSION_RECORD_AUDIO_REQUEST_CODE);
+            }
+        } else {
+            // Otherwise, permissions were granted and we are ready to go!
+            mAudioInputReader = new AudioInputReader(mVisualizerView, context);
+        }
     }
 }

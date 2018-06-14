@@ -19,6 +19,7 @@ package com.application.tardaniel.smartroom.AudioVisuals;
 import android.content.Context;
 import com.application.tardaniel.smartroom.R;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.os.SystemClock;
@@ -150,7 +151,7 @@ public class VisualizerView extends View {
         double currentAngleRadians = calcCurrentAngle();
 
         // Draw the background
-        canvas.drawColor(backgroundColor);
+        canvas.drawColor(Color.TRANSPARENT);
 
         // Draw each shape
         if (showBass) {
@@ -213,6 +214,7 @@ public class VisualizerView extends View {
         treble = trebleTotal / (bytes.length * TREBLE_SEGMENT_SIZE);
 
         invalidate();
+
     }
 
     /**

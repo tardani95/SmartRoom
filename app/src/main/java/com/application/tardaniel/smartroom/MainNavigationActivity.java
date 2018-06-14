@@ -48,7 +48,7 @@ import static com.application.tardaniel.smartroom.preferencecomponents.SettingsF
 
 
 public class MainNavigationActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, NetworkErrorFragment.OnConnectButtonPressedListener, VisualizerFragment.OnFragmentInteractionListener {
+        implements NavigationView.OnNavigationItemSelectedListener, NetworkErrorFragment.OnConnectButtonPressedListener{
 
     public static boolean DEBUG_MODE = false;
     public static final int DEFAULT_BACKGROUND_COLOR = Color.WHITE;
@@ -372,10 +372,5 @@ public class MainNavigationActivity extends AppCompatActivity
             }
         }
         return true;
-    }
-
-    @Override
-    public void onFragmentInteraction(Uri uri) {
-        
     }
 }

@@ -3,15 +3,20 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:gravity="center"
-    android:id="@+id/fragment_visualizer"
-    tools:context=".fragments.VisualizerFragment">
+    android:orientation="vertical"
+    tools:context="com.application.tardaniel.smartroom.fragments.VisualizerFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <!--<TextView-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="match_parent"-->
-        <!--android:text="@string/hello_blank_fragment" />-->
+    <Button
+        android:id="@+id/start_stop_button"
+        android:padding="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Start/Stop"/>
+
+    <com.application.tardaniel.smartroom.AudioVisuals.VisualizerView
+        android:id="@+id/visualizer_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
 
 </LinearLayout>
