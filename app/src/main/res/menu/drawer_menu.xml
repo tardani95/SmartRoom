@@ -11,6 +11,11 @@
             android:id="@+id/nav_party_mode"
             android:icon="@drawable/ic_3d_rotation"
             android:title="@string/nav_party_mode" />
+        <item
+            android:id="@+id/nav_visualizer"
+            android:icon="@drawable/ic_music_note"
+            android:title="@string/nav_visualizer"
+            />
     </group>
     <group android:checkableBehavior="single">
         <!--<item-->

@@ -38,6 +38,7 @@ public class SettingsFragment extends PreferenceFragment implements SharedPrefer
     public static final int DEFAULT_FRAGMENT_MODE_INT = 0;
     public static final int SIMPLE_MODE_FRAGMENT = 0;
     public static final int PARTY_MODE_FRAGMENT = 1;
+    public static final int VISUALIZER_FRAGMENT = 2;
     public static final int default_incoming_call_color = 0xf8ff00;
     public static final int default_sms_color = 0x00ecff;
 //    public static final int MY_PERMISSION_REQUEST_SMS = 0;

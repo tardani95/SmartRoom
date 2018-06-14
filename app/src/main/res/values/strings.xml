@@ -22,6 +22,8 @@
     <string name="saturation">Saturation</string>
     <string name="value">Value</string>
 
+    <!--Visualizer Fragment-->
+    <string name="nav_visualizer">Audio Visualizer</string>
 
     <!--Settings Fragment-->
     <string name="settings">Settings</string>
@@ -184,5 +186,6 @@
 
     <!-- Value in SharedPreferences for green color option -->
     <string name="pref_color_green_value" translatable="false">green</string>
+
 
 </resources>

@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
+import android.net.Uri;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.os.Build;
@@ -32,6 +33,7 @@ import com.application.tardaniel.smartroom.fragments.AboutFragment;
 import com.application.tardaniel.smartroom.fragments.NetworkErrorFragment;
 import com.application.tardaniel.smartroom.fragments.PartyModeFragment;
 import com.application.tardaniel.smartroom.fragments.SimpleModeFragment;
+import com.application.tardaniel.smartroom.fragments.VisualizerFragment;
 import com.application.tardaniel.smartroom.network.UdpIntentService;
 import com.application.tardaniel.smartroom.preferencecomponents.DeveloperSettingsFragment;
 import com.application.tardaniel.smartroom.preferencecomponents.SettingsFragment;
@@ -42,10 +44,11 @@ import static com.application.tardaniel.smartroom.preferencecomponents.SettingsF
 import static com.application.tardaniel.smartroom.preferencecomponents.SettingsFragment.PARTY_MODE_FRAGMENT;
 import static com.application.tardaniel.smartroom.preferencecomponents.SettingsFragment.PERMISSIONS;
 import static com.application.tardaniel.smartroom.preferencecomponents.SettingsFragment.SIMPLE_MODE_FRAGMENT;
+import static com.application.tardaniel.smartroom.preferencecomponents.SettingsFragment.VISUALIZER_FRAGMENT;
 
 
 public class MainNavigationActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, NetworkErrorFragment.OnConnectButtonPressedListener {
+        implements NavigationView.OnNavigationItemSelectedListener, NetworkErrorFragment.OnConnectButtonPressedListener, VisualizerFragment.OnFragmentInteractionListener {
 
     public static boolean DEBUG_MODE = false;
     public static final int DEFAULT_BACKGROUND_COLOR = Color.WHITE;
@@ -57,6 +60,7 @@ public class MainNavigationActivity extends AppCompatActivity
     private Fragment mModeFragment = new SimpleModeFragment();
     private SimpleModeFragment mSimpleModeFragment = new SimpleModeFragment();
     private PartyModeFragment mPartyModeFragment = new PartyModeFragment();
+    private VisualizerFragment mVisualizerFragment = new VisualizerFragment();
     private SettingsFragment mSettingsFragment = new SettingsFragment();
     private DeveloperSettingsFragment mDeveloperSettingsFragment = new DeveloperSettingsFragment();
     private Fragment mAboutFragment = new AboutFragment();
@@ -110,7 +114,6 @@ public class MainNavigationActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
         //check if the device is connected to a wifi network
-
 
         //showStartingFragment(mFragmentMode);
         if (checkWifiOnAndConnected()) {
@@ -166,6 +169,22 @@ public class MainNavigationActivity extends AppCompatActivity
                     mModeFragment = mPartyModeFragment;
                     if (getSupportActionBar() != null) {
                         getSupportActionBar().setTitle(R.string.nav_party_mode);
+                    }
+                    break;
+                } else {
+                    mModeFragment = mNetworkErrorFragment;
+                    if (getSupportActionBar() != null) {
+                        getSupportActionBar().setTitle(R.string.nav_simple_color_picker);
+                    }
+                }
+                break;
+            }
+            case R.id.nav_visualizer: {
+                mFragmentMode = VISUALIZER_FRAGMENT;
+                if (checkWifiOnAndConnected()) {
+                    mModeFragment = mVisualizerFragment;
+                    if (getSupportActionBar() != null) {
+                        getSupportActionBar().setTitle(R.string.nav_visualizer);
                     }
                     break;
                 } else {
@@ -298,6 +317,14 @@ public class MainNavigationActivity extends AppCompatActivity
                 ft.replace(R.id.fragment_container, mModeFragment).commit();
                 break;
             }
+            case 2: {
+                mModeFragment = mVisualizerFragment;
+                if (getSupportActionBar() != null) {
+                    getSupportActionBar().setTitle(R.string.app_name);
+                }
+                ft.replace(R.id.fragment_container, mModeFragment).commit();
+                break;
+            }
             case 3: {
                 mModeFragment = mNetworkErrorFragment;
                 if (getSupportActionBar() != null) {
@@ -345,5 +372,10 @@ public class MainNavigationActivity extends AppCompatActivity
             }
         }
         return true;
+    }
+
+    @Override
+    public void onFragmentInteraction(Uri uri) {
+        
     }
 }
