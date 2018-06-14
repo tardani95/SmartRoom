@@ -215,45 +215,55 @@ public class VisualizerView extends View {
      */
     public void updateFFT(byte[] bytes) {
         mBytes = bytes;
-
+        int divider = 20;
         // Calculate average for bass segment
         float bassTotal = 0;
         for (int i = 0; i < bytes.length * BASS_SEGMENT_SIZE; i++) {
             bassTotal += Math.abs(bytes[i]);
         }
-        bass = bassTotal / (bytes.length * BASS_SEGMENT_SIZE);
+        bass = bassTotal / divider*5; // / (bytes.length * BASS_SEGMENT_SIZE);
 
         // Calculate average for mid segment
         float midTotal = 0;
         for (int i = (int) (bytes.length * BASS_SEGMENT_SIZE); i < bytes.length * MID_SEGMENT_SIZE; i++) {
             midTotal += Math.abs(bytes[i]);
         }
-        mid = midTotal / (bytes.length * MID_SEGMENT_SIZE);
+        mid = midTotal / divider; // / (bytes.length * MID_SEGMENT_SIZE);
 
         // Calculate average for terble segment
         float trebleTotal = 0;
         for (int i = (int) (bytes.length * MID_SEGMENT_SIZE); i < bytes.length; i++) {
             trebleTotal += Math.abs(bytes[i]);
         }
-        treble = trebleTotal / (bytes.length * TREBLE_SEGMENT_SIZE);
+        treble = trebleTotal / divider; // / (bytes.length * TREBLE_SEGMENT_SIZE);
 
-        invalidate();
 
-        if(treble>1.5 || mid > 1.5){
-            hue+= 2;
-        }
-        if(bass>30){
-            hue+=30;
-        }
-        mHsv[0] = hue%360;
-        Log.i("treble,mid,bass", trebleTotal + " " + midTotal + " "+bassTotal);
-//        Log.i("", mid + " " + midTotal);
-//        Log.i("bass", bass + " " + bassTotal + " " + bytes.length);
         //saturation
         mHsv[1] = (float) 1;
         //value
         mHsv[2] = (float) 1;
+
+        hue += 0.5;
+        if( mid > 15){
+            hue += 1;
+        }
+        if (bass+treble > 140) {
+            hue += 27;
+        }else if(bass+treble > 100) {
+            hue += 8;
+        }
+//        mHsv[2] =(float)( bass>20?(mHsv[2]+0.05):(mHsv[2]-0.1));
+//        if( mHsv[2] > 1){
+//            mHsv[2] = 1;
+//        }
+        hue = hue % 360;
+        mHsv[0] = hue;
+        Log.i("treble,mid,bass", treble + " " + mid + " " + bass);
+//        Log.i("", mid + " " + midTotal);
+//        Log.i("bass", bass + " " + bassTotal + " " + bytes.length);
+
         mCallback.onBackgroundColorChanged(Color.HSVToColor(mHsv));
+        invalidate();
     }
 
     /**

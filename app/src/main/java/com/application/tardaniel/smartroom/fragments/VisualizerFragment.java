@@ -45,7 +45,9 @@ public class VisualizerFragment extends Fragment {
         setupSharedPreferences();
         setupPermissions();
 
-        mAudioInputReader.shutdown(false);
+        if (mAudioInputReader != null) {
+            mAudioInputReader.shutdown(false);
+        }
 
         mStartStopButton = (Button) rootView.findViewById(R.id.start_stop_button);
         mStartStopButton.setOnClickListener(new View.OnClickListener() {
@@ -55,7 +57,7 @@ public class VisualizerFragment extends Fragment {
                     if (startMusic) {
                         startMusic = false;
                         mAudioInputReader.restart();
-                    }else {
+                    } else {
                         startMusic = true;
                         mAudioInputReader.shutdown(false);
                     }
@@ -116,10 +118,10 @@ public class VisualizerFragment extends Fragment {
     }
 
     public void setBackgroundColor(int color) {
-        if(!startMusic){
+        if (!startMusic) {
             try {
                 getView().setBackgroundColor(color);
-                sendColor(getContext(),color,0);
+                sendColor(getContext(), color, 0);
                 //Toast.makeText(getContext(),"updateFFT",Toast.LENGTH_SHORT).show();
                 //Log.i("visualizer fragment",String.valueOf(color));
             } catch (NullPointerException e) {
