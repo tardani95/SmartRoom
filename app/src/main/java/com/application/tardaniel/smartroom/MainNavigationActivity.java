@@ -29,6 +29,7 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.application.tardaniel.smartroom.AudioVisuals.VisualizerView;
 import com.application.tardaniel.smartroom.fragments.AboutFragment;
 import com.application.tardaniel.smartroom.fragments.NetworkErrorFragment;
 import com.application.tardaniel.smartroom.fragments.PartyModeFragment;
@@ -48,7 +49,9 @@ import static com.application.tardaniel.smartroom.preferencecomponents.SettingsF
 
 
 public class MainNavigationActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, NetworkErrorFragment.OnConnectButtonPressedListener{
+        implements NavigationView.OnNavigationItemSelectedListener,
+        NetworkErrorFragment.OnConnectButtonPressedListener,
+        VisualizerView.OnBackgroundColorChangedListener {
 
     public static boolean DEBUG_MODE = false;
     public static final int DEFAULT_BACKGROUND_COLOR = Color.WHITE;
@@ -372,5 +375,10 @@ public class MainNavigationActivity extends AppCompatActivity
             }
         }
         return true;
+    }
+
+    @Override
+    public void onBackgroundColorChanged(int color) {
+        mVisualizerFragment.setBackgroundColor(color);
     }
 }

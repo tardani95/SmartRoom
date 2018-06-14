@@ -10,14 +10,18 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.application.tardaniel.smartroom.AudioVisuals.AudioInputReader;
 import com.application.tardaniel.smartroom.AudioVisuals.VisualizerView;
 import com.application.tardaniel.smartroom.R;
+
+import static com.application.tardaniel.smartroom.network.UdpIntentService.sendColor;
 
 public class VisualizerFragment extends Fragment {
 
@@ -62,6 +66,12 @@ public class VisualizerFragment extends Fragment {
         return rootView;
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        setupSharedPreferences();
+    }
+
     private void setupSharedPreferences() {
         // Get all of the values from shared preferences to set it up
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getContext());
@@ -87,20 +97,6 @@ public class VisualizerFragment extends Fragment {
     }
 
     /**
-     * onPause Cleanup audio stream
-     **/
-    @Override
-    public void onPause() {
-        super.onPause();
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        setupSharedPreferences();
-    }
-
-    /**
      * App Permissions for Audio
      **/
     private void setupPermissions() {
@@ -117,5 +113,19 @@ public class VisualizerFragment extends Fragment {
             // Otherwise, permissions were granted and we are ready to go!
             mAudioInputReader = new AudioInputReader(mVisualizerView, context);
         }
+    }
+
+    public void setBackgroundColor(int color) {
+        if(!startMusic){
+            try {
+                getView().setBackgroundColor(color);
+                sendColor(getContext(),color,0);
+                //Toast.makeText(getContext(),"updateFFT",Toast.LENGTH_SHORT).show();
+                //Log.i("visualizer fragment",String.valueOf(color));
+            } catch (NullPointerException e) {
+                e.printStackTrace();
+            }
+        }
+
     }
 }

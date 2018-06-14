@@ -17,7 +17,9 @@ package com.application.tardaniel.smartroom.AudioVisuals;
  */
 
 import android.content.Context;
+
 import com.application.tardaniel.smartroom.R;
+
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -26,6 +28,7 @@ import android.os.SystemClock;
 import android.support.annotation.ColorInt;
 import android.support.v4.content.ContextCompat;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
 
 
@@ -73,6 +76,9 @@ public class VisualizerView extends View {
     private float mid;
     private float treble;
 
+    private float mHsv[] = new float[3];
+    private float hue;
+
     // Determines whether each of these should be shown
     private boolean showBass;
     private boolean showMid;
@@ -81,8 +87,26 @@ public class VisualizerView extends View {
     @ColorInt
     private int backgroundColor;
 
+    OnBackgroundColorChangedListener mCallback;
+
+    public interface OnBackgroundColorChangedListener {
+        public void onBackgroundColorChanged(int color);
+    }
+
     public VisualizerView(Context context, AttributeSet attrs) {
         super(context, attrs);
+
+        // TODO: check if it is good
+        // This makes sure that the container fragment has implemented
+        // the callback interface. If not, it throws an exception
+        try {
+            mCallback = (OnBackgroundColorChangedListener) context;
+        } catch (ClassCastException e) {
+            throw new ClassCastException(context.toString()
+                    + " must implement OnHeadlineSelectedListener");
+        }
+
+
         mBytes = null;
         TrailedShape.setMinSize(MIN_SIZE_DEFAULT);
 
@@ -215,6 +239,21 @@ public class VisualizerView extends View {
 
         invalidate();
 
+        if(treble>1.5 || mid > 1.5){
+            hue+= 2;
+        }
+        if(bass>30){
+            hue+=30;
+        }
+        mHsv[0] = hue%360;
+        Log.i("treble,mid,bass", trebleTotal + " " + midTotal + " "+bassTotal);
+//        Log.i("", mid + " " + midTotal);
+//        Log.i("bass", bass + " " + bassTotal + " " + bytes.length);
+        //saturation
+        mHsv[1] = (float) 1;
+        //value
+        mHsv[2] = (float) 1;
+        mCallback.onBackgroundColorChanged(Color.HSVToColor(mHsv));
     }
 
     /**
