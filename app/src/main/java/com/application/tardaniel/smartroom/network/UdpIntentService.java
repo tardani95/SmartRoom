@@ -37,7 +37,7 @@ public class UdpIntentService extends IntentService {
 
     private static long mTime1 = 0;
     private static long mTime2 = 0;
-    private static final long DELTA = 40;
+    private static final long DELTA = 10;
 
 
     //for making toast messages
@@ -135,16 +135,16 @@ public class UdpIntentService extends IntentService {
             //String msg = color + " " + mode;
 
             //int[] packet = new int[3];
-            byte[] message = new byte[4];
-            message[0]=(byte)red;
-            message[1]=(byte)green;
-            message[2]=(byte)blue;
-            message[3]=(byte)mode;
-
-            message[3]=0;
+            byte[] message = new byte[5];
+            message[0]=(byte)233; //security byte
+            message[1]=(byte)mode;
+            message[1]=0;
+            message[2]=(byte)red;
+            message[3]=(byte)green;
+            message[4]=(byte)blue;
 
             DatagramSocket socket = new DatagramSocket();
-            DatagramPacket p = new DatagramPacket(message,4,sLocalAddress,sPort);
+            DatagramPacket p = new DatagramPacket(message,message.length,sLocalAddress,sPort);
             socket.send(p);
 
             /**int[] packet = new int[4];
