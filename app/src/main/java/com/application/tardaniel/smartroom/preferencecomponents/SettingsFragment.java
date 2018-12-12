@@ -32,12 +32,14 @@ public class SettingsFragment extends PreferenceFragment implements SharedPrefer
     public static final String KEY_PREF_INCOMING_CALL_COLOR = "pref_key_incoming_call_color";
     public static final String KEY_PREF_SMS_COLOR = "pref_key_sms_color";
     public static final String KEY_PREF_AUTO_COLOR_PICKING = "pref_auto_color_picking_mode";
-    public static String DEFAULT_LED_STRIP_IP = "192.168.1.3";
+    public static String DEFAULT_LED_STRIP_IP = "192.168.0.30";
 
     public static final String DEFAULT_FRAGMENT_MODE_STRING = "0";
     public static final int DEFAULT_FRAGMENT_MODE_INT = 0;
     public static final int SIMPLE_MODE_FRAGMENT = 0;
-    public static final int PARTY_MODE_FRAGMENT = 1;
+    public static final int COLOR_PALETTES_FRAGMENT = 1;
+    public static final int PARTY_MODE_FRAGMENT = 2;
+    public static final int VISUALIZER_FRAGMENT = 3;
     public static final int default_incoming_call_color = 0xf8ff00;
     public static final int default_sms_color = 0x00ecff;
 //    public static final int MY_PERMISSION_REQUEST_SMS = 0;

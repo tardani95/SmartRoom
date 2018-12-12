@@ -28,24 +28,31 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.application.tardaniel.smartroom.AudioVisuals.VisualizerView;
 import com.application.tardaniel.smartroom.fragments.AboutFragment;
+import com.application.tardaniel.smartroom.fragments.ColorPalettesFragment;
 import com.application.tardaniel.smartroom.fragments.NetworkErrorFragment;
 import com.application.tardaniel.smartroom.fragments.PartyModeFragment;
 import com.application.tardaniel.smartroom.fragments.SimpleModeFragment;
+import com.application.tardaniel.smartroom.fragments.VisualizerFragment;
 import com.application.tardaniel.smartroom.network.UdpIntentService;
 import com.application.tardaniel.smartroom.preferencecomponents.DeveloperSettingsFragment;
 import com.application.tardaniel.smartroom.preferencecomponents.SettingsFragment;
 
+import static com.application.tardaniel.smartroom.preferencecomponents.SettingsFragment.COLOR_PALETTES_FRAGMENT;
 import static com.application.tardaniel.smartroom.preferencecomponents.SettingsFragment.DEFAULT_FRAGMENT_MODE_INT;
 import static com.application.tardaniel.smartroom.preferencecomponents.SettingsFragment.DEFAULT_FRAGMENT_MODE_STRING;
 import static com.application.tardaniel.smartroom.preferencecomponents.SettingsFragment.KEY_PREF_VISUAL_NOTIFICATION;
 import static com.application.tardaniel.smartroom.preferencecomponents.SettingsFragment.PARTY_MODE_FRAGMENT;
 import static com.application.tardaniel.smartroom.preferencecomponents.SettingsFragment.PERMISSIONS;
 import static com.application.tardaniel.smartroom.preferencecomponents.SettingsFragment.SIMPLE_MODE_FRAGMENT;
+import static com.application.tardaniel.smartroom.preferencecomponents.SettingsFragment.VISUALIZER_FRAGMENT;
 
 
 public class MainNavigationActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, NetworkErrorFragment.OnConnectButtonPressedListener {
+        implements NavigationView.OnNavigationItemSelectedListener,
+        NetworkErrorFragment.OnConnectButtonPressedListener,
+        VisualizerView.OnBackgroundColorChangedListener {
 
     public static boolean DEBUG_MODE = false;
     public static final int DEFAULT_BACKGROUND_COLOR = Color.WHITE;
@@ -56,7 +63,9 @@ public class MainNavigationActivity extends AppCompatActivity
     private int mFragmentMode = 0;
     private Fragment mModeFragment = new SimpleModeFragment();
     private SimpleModeFragment mSimpleModeFragment = new SimpleModeFragment();
+    private ColorPalettesFragment mColorPalettesFragment = new ColorPalettesFragment();
     private PartyModeFragment mPartyModeFragment = new PartyModeFragment();
+    private VisualizerFragment mVisualizerFragment = new VisualizerFragment();
     private SettingsFragment mSettingsFragment = new SettingsFragment();
     private DeveloperSettingsFragment mDeveloperSettingsFragment = new DeveloperSettingsFragment();
     private Fragment mAboutFragment = new AboutFragment();
@@ -111,7 +120,6 @@ public class MainNavigationActivity extends AppCompatActivity
 
         //check if the device is connected to a wifi network
 
-
         //showStartingFragment(mFragmentMode);
         if (checkWifiOnAndConnected()) {
             //default fragment
@@ -155,11 +163,28 @@ public class MainNavigationActivity extends AppCompatActivity
                 } else {
                     mModeFragment = mNetworkErrorFragment;
                     if (getSupportActionBar() != null) {
-                        getSupportActionBar().setTitle(R.string.nav_simple_color_picker);
+                        getSupportActionBar().setTitle(R.string.network_error);
                     }
                 }
                 break;
             }
+            case R.id.nav_color_palettes: {
+                mFragmentMode = COLOR_PALETTES_FRAGMENT;
+                if (checkWifiOnAndConnected()) {
+                    mModeFragment = mColorPalettesFragment;
+                    if (getSupportActionBar() != null) {
+                        getSupportActionBar().setTitle(R.string.nav_color_palettes);
+                    }
+                    break;
+                } else {
+                    mModeFragment = mNetworkErrorFragment;
+                    if (getSupportActionBar() != null) {
+                        getSupportActionBar().setTitle(R.string.network_error);
+                    }
+                }
+                break;
+            }
+
             case R.id.nav_party_mode: {
                 mFragmentMode = PARTY_MODE_FRAGMENT;
                 if (checkWifiOnAndConnected()) {
@@ -171,7 +196,23 @@ public class MainNavigationActivity extends AppCompatActivity
                 } else {
                     mModeFragment = mNetworkErrorFragment;
                     if (getSupportActionBar() != null) {
-                        getSupportActionBar().setTitle(R.string.nav_simple_color_picker);
+                        getSupportActionBar().setTitle(R.string.network_error);
+                    }
+                }
+                break;
+            }
+            case R.id.nav_visualizer: {
+                mFragmentMode = VISUALIZER_FRAGMENT;
+                if (checkWifiOnAndConnected()) {
+                    mModeFragment = mVisualizerFragment;
+                    if (getSupportActionBar() != null) {
+                        getSupportActionBar().setTitle(R.string.nav_visualizer);
+                    }
+                    break;
+                } else {
+                    mModeFragment = mNetworkErrorFragment;
+                    if (getSupportActionBar() != null) {
+                        getSupportActionBar().setTitle(R.string.network_error);
                     }
                 }
                 break;
@@ -298,6 +339,14 @@ public class MainNavigationActivity extends AppCompatActivity
                 ft.replace(R.id.fragment_container, mModeFragment).commit();
                 break;
             }
+            case 2: {
+                mModeFragment = mVisualizerFragment;
+                if (getSupportActionBar() != null) {
+                    getSupportActionBar().setTitle(R.string.app_name);
+                }
+                ft.replace(R.id.fragment_container, mModeFragment).commit();
+                break;
+            }
             case 3: {
                 mModeFragment = mNetworkErrorFragment;
                 if (getSupportActionBar() != null) {
@@ -345,5 +394,10 @@ public class MainNavigationActivity extends AppCompatActivity
             }
         }
         return true;
+    }
+
+    @Override
+    public void onBackgroundColorChanged(int color) {
+        mVisualizerFragment.setBackgroundColor(color);
     }
 }

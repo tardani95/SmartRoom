@@ -12,6 +12,9 @@
     <!--request network connection state-->
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
 
+    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+
     <!--TODO: udpdate application icon-->
     <application
         android:allowBackup="true"
@@ -36,7 +39,8 @@
 
         <receiver
             android:name=".broadcastreceiver.NotificationReceiver"
-            android:enabled="true">
+            android:enabled="true"
+            android:permission="android.permission.BROADCAST_SMS">
             <intent-filter>
                 <action android:name="android.provider.Telephony.SMS_RECEIVED" />
                 <action android:name="android.intent.action.PHONE_STATE"/>

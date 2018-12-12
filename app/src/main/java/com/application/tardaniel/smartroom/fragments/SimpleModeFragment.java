@@ -129,7 +129,7 @@ public class SimpleModeFragment extends Fragment {
         int selectedColor = mColorPicker.getColor();
         mColorPicker.setOldCenterColor(selectedColor);
         setBackgroundColor(selectedColor);
-        //Log.d(getString(R.string.tag_frag_color_picker_simple_mode), String.valueOf(selectedColor));
+        //Log.d(get String(R.string.tag_frag_color_picker_simple_mode), String.valueOf(selectedColor));
 
         String hexColor = String.format("#%06X", (0xFFFFFF & selectedColor));
         //sendPacket(getContext(), hexColor, getString(R.string.mode_simple));

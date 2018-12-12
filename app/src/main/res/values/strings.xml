@@ -22,6 +22,8 @@
     <string name="saturation">Saturation</string>
     <string name="value">Value</string>
 
+    <!--Visualizer Fragment-->
+    <string name="nav_visualizer">Audio Visualizer</string>
 
     <!--Settings Fragment-->
     <string name="settings">Settings</string>
@@ -29,7 +31,7 @@
     <string name="led_strip">LED Strip</string>
     <string name="led_strip_pref_title">Local network IP address</string>
     <string name="led_strip_pref_description">Set the local network address of the Led Strip</string>
-    <string name="default_led_strip_ip">192.168.1.3</string>
+    <string name="default_led_strip_ip">192.168.0.30</string>
 
     <string name="notifications">Notifications</string>
     <string name="visual_notification_pref_title">Visual Notifications</string>
@@ -121,6 +123,79 @@
     <string name="red">red</string>
     <string name="green">green</string>
     <string name="blue">blue</string>
+
+
+    <!-- - - - - - - - - - - - - - - -
+              - Visualizer  -
+              - - - - - - - - - - - - - - - -->
+    <string name="action_settings">Settings</string>
+    <!-- - - - - - - - - - - - - - - -
+          - Used by Preferences  -
+          - - - - - - - - - - - - - - - -->
+
+    <!-- Label for the show bass checkbox preference -->
+    <string name="pref_show_bass_label">Show Bass</string>
+    <!-- Key name for storing bass in SharedPreferences -->
+    <string name="pref_show_bass_key" translatable="false">show_bass</string>
+
+    <!-- Label for the show mid range checkbox preference -->
+    <string name="pref_show_mid_range_label">Show Mid Range</string>
+    <!-- Key name for storing mid range in SharedPreferences -->
+    <string name="pref_show_mid_range_key" translatable="false">show_mid_range</string>
+
+    <!-- Label for the show treble checkbox preference -->
+    <string name="pref_show_treble_label">Show Treble</string>
+    <!-- Key name for storing treble in SharedPreferences -->
+    <string name="pref_show_treble_key" translatable="false">show_treble</string>
+
+    <!-- Summary for Checkboxes -->
+    <string name="pref_show_true">Shown</string>
+    <string name="pref_show_false">Hidden</string>
+
+
+    <!-- Label for the size preference -->
+    <string name="pref_size_label">Size Multiplier</string>
+
+    <!-- Key name for storing size in SharedPreferences -->
+    <string name="pref_size_key" translatable="false">size</string>
+
+    <!-- Default for size preference -->
+    <string name="pref_size_default" translatable="false">1</string>
+
+
+    <!-- Label for the color preference -->
+    <string name="pref_color_label">Shape Color</string>
+
+    <!-- Label for red color preference -->
+    <string name="pref_color_label_red">Red</string>
+    <!-- Label for blue color preference -->
+    <string name="pref_color_label_blue">Blue</string>
+    <!-- Label for green color preference -->
+    <string name="pref_color_label_green">Green</string>
+
+    <!-- Key name for color preference in SharedPreferences -->
+    <string name="pref_color_key" translatable="false">color</string>
+
+    <!-- Value in SharedPreferences for red color option -->
+    <string name="pref_color_red_value" translatable="false">red</string>
+
+    <!-- Value in SharedPreferences for blue color option -->
+    <string name="pref_color_blue_value" translatable="false">blue</string>
+
+    <!-- Value in SharedPreferences for green color option -->
+    <string name="pref_color_green_value" translatable="false">green</string>
+    <string name="visualizer_pref_title">Visualizer</string>
+    <string name="clear_pal">Clear Palette</string>
+    <string name="palette1">Initial Palette</string>
+    <string name="palette2">Rainbow Palette</string>
+    <string name="palette3">Rainbow Stripe Palette</string>
+    <string name="palette4">Party Palette</string>
+    <string name="palette5">Heat Palette</string>
+    <string name="palette6">Fire Palette</string>
+    <string name="palette7">Hungarian Flag</string>
+    <string name="palette8">Romanian Flag</string>
+    <string name="nav_color_palettes">Color Palettes</string>
+    <string name="network_error">Network Error</string>
 
 
 </resources>

@@ -3,4 +3,18 @@
     <color name="colorPrimary">#37474f</color>
     <color name="colorPrimaryDark">#263238</color>
     <color name="colorAccent">#009688</color>
+    <!-- - - - - - - - - - - - - - - -
+              - Visualizer  -
+              - - - - - - - - - - - - - - - -->
+    <color name="shapeRed">#F44336</color>
+    <color name="trailRed">#B71C1C</color>
+    <color name="backgroundRed">#FFCDD2</color>
+
+    <color name="shapeBlue">#3F51B5</color>
+    <color name="trailBlue">#1A237E</color>
+    <color name="backgroundBlue">#C5CAE9</color>
+
+    <color name="shapeGreen">#4CAF50</color>
+    <color name="trailGreen">#1B5E20</color>
+    <color name="backgroundGreen">#C8E6C9</color>
 </resources>
