@@ -7,7 +7,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
-import android.net.Uri;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.os.Build;
@@ -31,6 +30,7 @@ import android.view.View;
 
 import com.application.tardaniel.smartroom.AudioVisuals.VisualizerView;
 import com.application.tardaniel.smartroom.fragments.AboutFragment;
+import com.application.tardaniel.smartroom.fragments.ColorPalettesFragment;
 import com.application.tardaniel.smartroom.fragments.NetworkErrorFragment;
 import com.application.tardaniel.smartroom.fragments.PartyModeFragment;
 import com.application.tardaniel.smartroom.fragments.SimpleModeFragment;
@@ -39,6 +39,7 @@ import com.application.tardaniel.smartroom.network.UdpIntentService;
 import com.application.tardaniel.smartroom.preferencecomponents.DeveloperSettingsFragment;
 import com.application.tardaniel.smartroom.preferencecomponents.SettingsFragment;
 
+import static com.application.tardaniel.smartroom.preferencecomponents.SettingsFragment.COLOR_PALETTES_FRAGMENT;
 import static com.application.tardaniel.smartroom.preferencecomponents.SettingsFragment.DEFAULT_FRAGMENT_MODE_INT;
 import static com.application.tardaniel.smartroom.preferencecomponents.SettingsFragment.DEFAULT_FRAGMENT_MODE_STRING;
 import static com.application.tardaniel.smartroom.preferencecomponents.SettingsFragment.KEY_PREF_VISUAL_NOTIFICATION;
@@ -62,6 +63,7 @@ public class MainNavigationActivity extends AppCompatActivity
     private int mFragmentMode = 0;
     private Fragment mModeFragment = new SimpleModeFragment();
     private SimpleModeFragment mSimpleModeFragment = new SimpleModeFragment();
+    private ColorPalettesFragment mColorPalettesFragment = new ColorPalettesFragment();
     private PartyModeFragment mPartyModeFragment = new PartyModeFragment();
     private VisualizerFragment mVisualizerFragment = new VisualizerFragment();
     private SettingsFragment mSettingsFragment = new SettingsFragment();
@@ -161,11 +163,28 @@ public class MainNavigationActivity extends AppCompatActivity
                 } else {
                     mModeFragment = mNetworkErrorFragment;
                     if (getSupportActionBar() != null) {
-                        getSupportActionBar().setTitle(R.string.nav_simple_color_picker);
+                        getSupportActionBar().setTitle(R.string.network_error);
                     }
                 }
                 break;
             }
+            case R.id.nav_color_palettes: {
+                mFragmentMode = COLOR_PALETTES_FRAGMENT;
+                if (checkWifiOnAndConnected()) {
+                    mModeFragment = mColorPalettesFragment;
+                    if (getSupportActionBar() != null) {
+                        getSupportActionBar().setTitle(R.string.nav_color_palettes);
+                    }
+                    break;
+                } else {
+                    mModeFragment = mNetworkErrorFragment;
+                    if (getSupportActionBar() != null) {
+                        getSupportActionBar().setTitle(R.string.network_error);
+                    }
+                }
+                break;
+            }
+
             case R.id.nav_party_mode: {
                 mFragmentMode = PARTY_MODE_FRAGMENT;
                 if (checkWifiOnAndConnected()) {
@@ -177,7 +196,7 @@ public class MainNavigationActivity extends AppCompatActivity
                 } else {
                     mModeFragment = mNetworkErrorFragment;
                     if (getSupportActionBar() != null) {
-                        getSupportActionBar().setTitle(R.string.nav_simple_color_picker);
+                        getSupportActionBar().setTitle(R.string.network_error);
                     }
                 }
                 break;
@@ -193,7 +212,7 @@ public class MainNavigationActivity extends AppCompatActivity
                 } else {
                     mModeFragment = mNetworkErrorFragment;
                     if (getSupportActionBar() != null) {
-                        getSupportActionBar().setTitle(R.string.nav_simple_color_picker);
+                        getSupportActionBar().setTitle(R.string.network_error);
                     }
                 }
                 break;

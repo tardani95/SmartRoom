@@ -44,8 +44,8 @@ public class AudioInputReader {
 
     private void initVisualizer() {
         // Setup media player
-//        mPlayer = MediaPlayer.create(mContext, R.raw.two_feet_go_fuck_yourself);
-        mPlayer = MediaPlayer.create(mContext, R.raw.vigiland_friday_night);
+        mPlayer = MediaPlayer.create(mContext, R.raw.two_feet_go_fuck_yourself);
+//        mPlayer = MediaPlayer.create(mContext, R.raw.vigiland_friday_night);
 //        mPlayer = MediaPlayer.create(mContext, R.raw.htmlthesong);
         mPlayer.setLooping(true);
 

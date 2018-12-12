@@ -37,7 +37,7 @@ public class UdpIntentService extends IntentService {
 
     private static long mTime1 = 0;
     private static long mTime2 = 0;
-    private static final long DELTA = 10;
+    private static final long DELTA = 45;
 
 
     //for making toast messages
@@ -138,7 +138,7 @@ public class UdpIntentService extends IntentService {
             byte[] message = new byte[5];
             message[0]=(byte)233; //security byte
             message[1]=(byte)mode;
-            message[1]=0;
+//            message[1]=0;
             message[2]=(byte)red;
             message[3]=(byte)green;
             message[4]=(byte)blue;

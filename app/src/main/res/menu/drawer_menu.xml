@@ -8,6 +8,10 @@
             android:icon="@drawable/ic_invert_colors"
             android:title="@string/nav_simple_color_picker" />
         <item
+            android:id="@+id/nav_color_palettes"
+            android:icon="@drawable/ic_palette"
+            android:title="@string/nav_color_palettes" />
+        <item
             android:id="@+id/nav_party_mode"
             android:icon="@drawable/ic_3d_rotation"
             android:title="@string/nav_party_mode" />

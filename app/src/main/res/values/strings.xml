@@ -31,7 +31,7 @@
     <string name="led_strip">LED Strip</string>
     <string name="led_strip_pref_title">Local network IP address</string>
     <string name="led_strip_pref_description">Set the local network address of the Led Strip</string>
-    <string name="default_led_strip_ip">192.168.1.3</string>
+    <string name="default_led_strip_ip">192.168.0.30</string>
 
     <string name="notifications">Notifications</string>
     <string name="visual_notification_pref_title">Visual Notifications</string>
@@ -125,8 +125,6 @@
     <string name="blue">blue</string>
 
 
-
-
     <!-- - - - - - - - - - - - - - - -
               - Visualizer  -
               - - - - - - - - - - - - - - - -->
@@ -187,6 +185,17 @@
     <!-- Value in SharedPreferences for green color option -->
     <string name="pref_color_green_value" translatable="false">green</string>
     <string name="visualizer_pref_title">Visualizer</string>
+    <string name="clear_pal">Clear Palette</string>
+    <string name="palette1">Initial Palette</string>
+    <string name="palette2">Rainbow Palette</string>
+    <string name="palette3">Rainbow Stripe Palette</string>
+    <string name="palette4">Party Palette</string>
+    <string name="palette5">Heat Palette</string>
+    <string name="palette6">Fire Palette</string>
+    <string name="palette7">Hungarian Flag</string>
+    <string name="palette8">Romanian Flag</string>
+    <string name="nav_color_palettes">Color Palettes</string>
+    <string name="network_error">Network Error</string>
 
 
 </resources>
