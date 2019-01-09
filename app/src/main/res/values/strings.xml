@@ -3,6 +3,7 @@
 
     <!--Navigation Drawer-->
     <string name="nav_simple_color_picker">Simple Color Picker</string>
+    <string name="nav_color_palettes">Color Palettes</string>
     <string name="nav_party_mode">Party Mode</string>
     <string name="nav_settings">Settings</string>
     <string name="nav_dev_settings">Developer Settings</string>
@@ -194,7 +195,8 @@
     <string name="palette6">Fire Palette</string>
     <string name="palette7">Hungarian Flag</string>
     <string name="palette8">Romanian Flag</string>
-    <string name="nav_color_palettes">Color Palettes</string>
+
+
     <string name="network_error">Network Error</string>
 
 

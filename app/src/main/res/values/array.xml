@@ -22,6 +22,7 @@
     </string-array>
     <string-array name="default_fragments">
         <item>Simple Color Picker Mode</item>
+        <item>Color Palettes</item>
         <item>Party Mode</item>
         <item>Audio Visualizer</item>
     </string-array>
@@ -29,6 +30,7 @@
         <item>0</item>
         <item>1</item>
         <item>2</item>
+        <item>3</item>
     </string-array>
 
     <!-- Label ordering must match values -->
